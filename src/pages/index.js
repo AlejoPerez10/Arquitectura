@@ -4,25 +4,15 @@ import React, { useState } from 'react';
 import styles from '@/styles/Home.module.css'
 
 const inputsIndex = [
-  {
-    name: 'email',
-    type: 'email',
-    placeholder: 'Email',
-    required: true,
-  },
-  {
-    name: 'password',
-    type: 'password',
-    placeholder: 'Password',
-    required: true
-  }
+  {name: 'email', type: 'email', placeholder: 'Email', required: true},
+  {name: 'password', type: 'password', placeholder: 'Password', required: true}
 ];
 
 export default function IndexPage() {
   const router = useRouter();
   const [error, setError] = useState('');
 
-  const handleLoginSubmit = (loginData) => {
+  /*const handleLoginSubmit = (loginData) => {
     const { email, password } = loginData;
     const storedUser = JSON.parse(localStorage.getItem(email));
 
@@ -33,6 +23,29 @@ export default function IndexPage() {
     } else {
       setError('Invalid email or password');
       setTimeout(() => setError(''), 3000); // Borra el mensaje de error después de 3 segundos
+    }
+  }; */
+
+  const handleLoginSubmit = async (loginData) => {
+    try {
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(loginData),
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem('currentUser', JSON.stringify(data.user));
+        router.push('/tripList');
+      } else {
+        setError(data.message || 'Invalid email or password');
+        setTimeout(() => setError(''), 3000);
+      }
+    } catch (err) {
+      setError('Server error');
+      setTimeout(() => setError(''), 3000);
     }
   };
 

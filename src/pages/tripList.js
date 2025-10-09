@@ -62,13 +62,22 @@ export default function TripListPage() {
     const [selectedCurrency, setSelectedCurrency] = useState('');
     const [friendEmail, setFriendEmail] = useState('');
 
-    useEffect(() => {
+    /*useEffect(() => {
         if (typeof window !== "undefined") {
             const currentUser = JSON.parse(localStorage.getItem('currentUser')) || { Trips: [] };
             setUsuario(currentUser);
             setTrips(currentUser.Trips);
         }
+    }, []);*/
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const currentUser = JSON.parse(localStorage.getItem('currentUser')) || {};
+            setUsuario(currentUser);
+            setTrips(currentUser.Trips || []); // <- evita undefined
+        }
     }, []);
+
 
     const handleCurrencyChange = (e) => {
         setSelectedCurrency(e.target.value);

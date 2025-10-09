@@ -43,7 +43,7 @@ export default function SignUpPage() {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
-  const handleSignUpSubmit = (signUpData) => {
+  /*const handleSignUpSubmit = (signUpData) => {
     const { email, password, 'confirm password': confirmPassword, name, 'last name': lastName } = signUpData;
 
     if (password.length <= 6) {
@@ -73,7 +73,49 @@ export default function SignUpPage() {
       setMessage('');
       router.push('/'); // Redirige al login después del registro
     }, 2000);
-  };
+  };*/
+
+  const handleSignUpSubmit = async (signUpData) => {
+  const { email, password, 'confirm password': confirmPassword, name, 'last name': lastName } = signUpData;
+
+  if (password.length <= 6) {
+    setError('Password must be more than 6 characters');
+    setTimeout(() => setError(''), 3000);
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    setError('Passwords do not match');
+    setTimeout(() => setError(''), 3000);
+    return;
+  }
+
+  try {
+    const res = await fetch('/api/signup', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, lastName, email, password }),
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      setError(data.message || 'Error creating user');
+      setTimeout(() => setError(''), 3000);
+      return;
+    }
+
+    setMessage('Account created successfully');
+    setTimeout(() => {
+      setMessage('');
+      router.push('/');
+    }, 2000);
+  } catch (error) {
+    setError('Server error');
+    setTimeout(() => setError(''), 3000);
+  }
+};
+
 
   return (
     <>
