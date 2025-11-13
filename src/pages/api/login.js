@@ -1,4 +1,41 @@
-import dbConnect from "/lib/mongodb";
+import dbConnect from "../../../lib/mongodb";
+import { loginController } from "@/controllers/authController";
+
+export default async function handler(req, res) {
+    await dbConnect();
+    if (req.method === "POST") return loginController(req, res);
+    res.status(405).json({ message: "Method not allowed" });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*import dbConnect from "/lib/mongodb";
 import User from "@/models/User";
 
 export default async function handler(req, res) {
@@ -36,3 +73,4 @@ export default async function handler(req, res) {
         res.status(405).json({ message: "Method not allowed" });
     }
 }
+*/
