@@ -74,16 +74,13 @@
 1. **Idoneidad Funcional**<br>
 `Mi estructura organizada me ayuda a saber que mi proyecto hace lo que tiene que hacer:`
 
-- Completitud Funcional: Al separar todo en models, controllers y services, puedo revisar rápidamente que cada función o requisito del sistema esté implementado.
+- **Completitud Funcional:** Al separar todo en models, controllers y services, puedo revisar rápidamente que cada función o requisito del sistema esté implementado.
 
-- Exactitud Funcional: Tengo la lógica principal en controllers y services, lo que me facilita verificar que cada operación (como el login o guardar un dato) dé el resultado correcto y esperado.
+- **Exactitud Funcional:** Tengo la lógica principal en controllers y services, lo que me facilita verificar que cada operación (como el login o guardar un dato) dé el resultado correcto y esperado.
 
 2. **Eficiencia de Ejecución**<br>
 `Aunque la velocidad depende del código, mi organización me ayuda a ser eficiente:`
 
-- Uso de Recursos: Al usar el patrón Singleton en mi conexión a la base de datos (lib/mongodb.js), me aseguro de que solo haya una única conexión activa, lo que ahorra recursos del servidor.
+- **Uso de Recursos:** Al usar el patrón Singleton en mi conexión a la base de datos (lib/mongodb.js), me aseguro de que solo haya una única conexión activa, lo que ahorra recursos del servidor.
 
-- Tiempo de Comportamiento: Tener controllers y models limpios me permite encontrar y arreglar fácilmente las partes lentas del código (cuellos de botella) para mejorar la velocidad de respuesta de la aplicación.
-
-3. **Compatibilidad**<br>
-- `Interoperabilidad:` El hecho de tener mis endpoints separados en pages/api me permite tener una arquitectura de servicio, lo que facilita que otras aplicaciones (como una app móvil o un frontend) puedan conectarse y usar mi sistema.
+- **Tiempo de Comportamiento:** Tener controllers y models limpios me permite encontrar y arreglar fácilmente las partes lentas del código (cuellos de botella) para mejorar la velocidad de respuesta de la aplicación.
